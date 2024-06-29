@@ -1,0 +1,24 @@
+.paddingContainer{
+    padding: 32px 64px;
+}
+
+.imgCard{
+    border-radius:50%;
+}
+
+.centerContainer{
+    display: block;
+}
+
+.chipList{
+    position: relative;
+    top: 20%;
+}
+
+.pt-24{
+    padding-top: 24px;
+}
+
+.pointer{
+    cursor: pointer;
+}
