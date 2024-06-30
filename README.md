@@ -1,7 +1,9 @@
 # Readme
+
 TechnicalTestPodcast app web desarrollada con React y Javascript
->
+
 > [!Note]
+>
 > - React Router Dom: https://reactrouter.com/en/main
 > - React Query: https://tanstack.com/query/latest/docs/framework/react/overview
 > - Redux: https://redux.js.org/
@@ -10,6 +12,7 @@ TechnicalTestPodcast app web desarrollada con React y Javascript
 
 > [!TIP]
 > Aplicación creada con VITE: https://vitejs.dev/
+>
 > - Comando para arrancar la aplicación en local: npm run dev
 > - Comando para la build: npm run build
 
