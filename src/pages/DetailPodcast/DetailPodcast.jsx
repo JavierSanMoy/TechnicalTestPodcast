@@ -20,7 +20,6 @@ const DetailPodcast = () => {
   const podcasts = useSelector((state) => state.podcasts);
   const { detailPodcastChapters } = podcasts;
   const { podcastId } = useParams();
-  console.log(detailPodcastChapters);
   const { isLoading, refetch } = useQuery(
     ["fetchDetailPodcastChapters", podcastId],
     () => fetchDetailPodcastChapters(podcastId),
