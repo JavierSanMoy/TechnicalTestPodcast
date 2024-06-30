@@ -7,7 +7,6 @@ import PodcastDetailCard from "../../components/PodcastDetailCard/PodcastDetailC
 
 const DetailChapterPodcast = () => {
   const { episodeId } = useParams();
-  console.log(episodeId);
   return (
     <Grid
       container
