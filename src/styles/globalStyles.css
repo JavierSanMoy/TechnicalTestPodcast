@@ -15,10 +15,27 @@
     top: 20%;
 }
 
+.m-12{
+    margin: 12px 0;
+}
+
+.m-24{
+    margin: 24px 0;
+}
+
 .pt-24{
     padding-top: 24px;
 }
 
 .pointer{
     cursor: pointer;
+}
+
+.justifyContent{
+    display: flex;
+    justify-content: center;
+}
+
+.textDescription{
+    font-style: italic;
 }

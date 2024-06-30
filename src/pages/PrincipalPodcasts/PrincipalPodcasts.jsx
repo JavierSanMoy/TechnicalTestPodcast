@@ -5,25 +5,29 @@ import { CircularProgress, Grid } from "@mui/material";
 import PodcastCard from "../../components/PodcastCard/PodcastCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setLastDateFetchListPodcast,
   setListFilterPodcast,
   setListPodcast,
 } from "../../slices/podcastsSlice";
 import TitleBar from "../../components/TitleBar/TitleBar";
 import PodcastSearch from "../../components/PodcastSearch/PodcastSearch";
+import {
+  getDataSessionStorage,
+  saveDataSessionStorage,
+} from "../../common/utils/utils";
 
 const PrincipalPodcasts = () => {
   const dispatch = useDispatch();
   const podcasts = useSelector((state) => state.podcasts);
-  const { listFilterPodcasts, lastDateFetchListPodcast } = podcasts;
+  const { listFilterPodcasts } = podcasts;
   const { isLoading, refetch } = useQuery(
     "fetchListPodcasts",
     fetchListPodcasts,
     {
+      enabled: false,
       onSuccess: (data) => {
-        dispatch(setLastDateFetchListPodcast(new Date().getTime()));
         dispatch(setListPodcast(data.feed?.entry));
         dispatch(setListFilterPodcast(data.feed?.entry));
+        saveDataSessionStorage("listPodcasts", data.feed?.entry);
       },
       onError: (error) => {
         console.log(error);
@@ -32,14 +36,14 @@ const PrincipalPodcasts = () => {
     }
   );
   useEffect(() => {
-    if (
-      !lastDateFetchListPodcast ||
-      new Date().getTime() - lastDateFetchListPodcast > 24 * 60 * 60 * 1000
-    ) {
+    const listPodcasts = getDataSessionStorage("listPodcasts");
+    if (!listPodcasts) {
       refetch();
+    } else {
+      dispatch(setListPodcast(listPodcasts));
+      dispatch(setListFilterPodcast(listPodcasts));
     }
-  }, [lastDateFetchListPodcast]);
-
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -51,18 +55,19 @@ const PrincipalPodcasts = () => {
           </Grid>
           <PodcastSearch />
           <Grid container>
-            {listFilterPodcasts?.map((podcast) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                key={podcast.id.attributes["im:id"]}
-              >
-                <PodcastCard podcast={podcast} />
-              </Grid>
-            ))}
+            {listFilterPodcasts.length > 0 &&
+              listFilterPodcasts.map((podcast) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  key={podcast.id.attributes["im:id"]}
+                >
+                  <PodcastCard podcast={podcast} />
+                </Grid>
+              ))}
           </Grid>
         </Grid>
       )}

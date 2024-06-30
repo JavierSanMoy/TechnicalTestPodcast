@@ -13,7 +13,7 @@ const TitleBar = () => {
       <Button variant="text" onClick={handleClick}>
         Podcaster
       </Button>
-      <Divider />
+      <Divider sx={{ margin: "12px 0" }} />
     </>
   );
 };

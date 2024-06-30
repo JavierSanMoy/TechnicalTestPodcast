@@ -3,11 +3,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setDetailPodcast } from "../../slices/podcastsSlice";
 
 const PodcastCard = ({ podcast }) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleClick = () => {
+    dispatch(setDetailPodcast(podcast));
     navigate(`/podcast/${podcast.id.attributes["im:id"]}`);
   };
   return (
